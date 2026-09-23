@@ -1,0 +1,28 @@
+.calculator {
+    display: flex;
+    justify-content: center;
+    border: solid black 1px;
+    border-radius: 5px;
+    padding: 16px;
+    width: 600px;
+    flex-wrap: wrap;
+}
+
+#display {
+    background-color: white;
+    border-color: darkgray;
+    border-radius: 5px;
+    width: 568px;
+    resize: none;
+    
+}
+
+.buttons-div {
+    justify-content: center; 
+}
+
+button {
+    width: 120px;
+    height: 71px;
+    border-radius: 10px;
+}
