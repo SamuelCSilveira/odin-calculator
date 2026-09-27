@@ -7,32 +7,50 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="calculator">
-        <div class="display-div">
-            <textarea id="display" disabled="1"></textarea>
-        </div>
-        <div class="buttons-div">
-            <button class="digit">7</button>
-            <button class="digit">8</button>
-            <button class="digit">9</button>
-            <button class="operator">+</button>
-            <button class="digit">4</button>
-            <button class="digit">5</button>
-            <button class="digit">6</button>
-            <button class="operator">-</button>
-            <button class="digit">1</button>
-            <button class="digit">2</button>
-            <button class="digit">3</button>
-            <button class="operator">*</button>
-            <button class="digit">0</button>
-            <button class="digit">.</button>
-            <button class="operator">=</button>
-            <button class="operator">/</button>
-            <button class="all-clear">AC</button>
-            <button class="clear">C</button>
-        </div>
-        
-        
+    <div class="container">
+        <h1>Odin Calculator</h1>
+
+        <div class="calculator">
+            <div class="display-div">
+                <textarea id="display" disabled="1"></textarea>
+            </div>
+
+            <div class="buttons-div">
+                <div class="digits">
+                    <div class="delete-row">
+                        <button class="all-clear">AC</button>
+                        <button class="clear">C</button>
+                    </div>
+                    <div class="row">
+                        <button class="digit">7</button>
+                        <button class="digit">8</button>
+                        <button class="digit">9</button>
+                    </div>
+                    <div class="row">
+                        <button class="digit">4</button>
+                        <button class="digit">5</button>
+                        <button class="digit">6</button>
+                    </div>
+                    <div class="row">
+                        <button class="digit">1</button>
+                        <button class="digit">2</button>
+                        <button class="digit">3</button>
+                    </div>
+                    <div class="row">
+                        <button class="digit">0</button>
+                        <button class="digit">.</button>
+                        <button class="operator">=</button>
+                    </div>
+                </div>
+
+                <div class="operands">
+                    <button class="operator">x</button>
+                    <button class="operator">÷</button>
+                    <button class="operator">-</button>
+                    <button class="operator" id="plus">+</button>
+                </div>
+            </div>
+        </div>           
     </div>
 
     <script src="script.js"></script>

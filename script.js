@@ -11,8 +11,8 @@ function operate(a, b, op) {
     switch (op) {
         case "+": return add(a, b);
         case "-": return subtract(a, b);
-        case "*": return multiply(a, b);
-        case "/": return divide(a, b);
+        case "x": return multiply(a, b);
+        case "÷": return divide(a, b);
         default: return a;
     }
 }
@@ -71,6 +71,31 @@ function isErrorMessage(string) {
     return string.slice(0, 5) === "Error";
 }
 
+function setButtonsColorEffects(button) {
+    let hoverColor, originalColor;
+    if (button.innerText === "C" || button.innerText === "AC") {
+        hoverColor = "rgba(255, 132, 132, 0.92)";
+        originalColor = "rgba(243, 77, 77, 0.918)";
+    }
+    if ("0123456789.=".includes(button.innerText)) {
+        hoverColor = "darkgray";
+        originalColor = "gray";
+    }
+    if ("x÷-".includes(button.innerText)) {
+        hoverColor = "rgb(76, 179, 173)";
+        originalColor = "rgb(25, 138, 132)";
+    }
+    if (button.innerText === "+") {
+        hoverColor = "rgb(255, 179, 86)";
+        originalColor = "darkorange";
+    }
+
+    button.addEventListener("mouseenter", e => e.target.style.backgroundColor = hoverColor);
+    button.addEventListener("mouseleave", e => e.target.style.backgroundColor = originalColor);
+    button.addEventListener("mousedown", e => e.target.style.backgroundColor = originalColor);
+    button.addEventListener("mouseup", e => e.target.style.backgroundColor = hoverColor);
+}
+
 let a;
 let b;
 let op;
@@ -81,17 +106,20 @@ const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
 const allClear = document.querySelector(".all-clear");
 const clear = document.querySelector(".clear");
+const buttons = document.querySelectorAll("button");
 
 
 for (const digit of digits) {
     digit.addEventListener("click", () => {
         if (isErrorMessage(display.textContent)) display.textContent = "";
 
+        // Resets the input after a result
         if (isResult) {
             display.textContent = "";
             isResult = false;
         }
 
+        // Prevents adding more than one "."
         if (digit.innerText === ".") {
             if ((isADecimal(display.textContent, op) && !op) || 
             isBDecimal(display.textContent, op)) return;
@@ -100,6 +128,7 @@ for (const digit of digits) {
                 display.textContent === a + op) display.textContent += "0";
         }
 
+        // Prevents the stacking of leading zeroes in the input
         if (isAFirstDigit(display.textContent, op) &&
             isAZero(display.textContent, op) && !op) {
             if (digit.innerText === "0") return;
@@ -117,10 +146,12 @@ for (const digit of digits) {
         if (!op) a = getA(display.textContent, op);
         else b = getB(display.textContent, op);
     });
-        
-    document.addEventListener("keydown", (e) => {
+    
+    document.addEventListener("keydown", e => {
         if (e.key === digit.innerText) digit.click();
     });
+    
+    setButtonsColorEffects(digit);
 };
 
 for (const operator of operators) {
@@ -132,6 +163,7 @@ for (const operator of operators) {
                 a = getA(display.textContent, op);
         }
         if (operator.innerText === "=") {
+            if (!b) b = 0;
             display.textContent = operate(a, b, op);
             resetVariables(display.textContent);
             return;
@@ -145,10 +177,14 @@ for (const operator of operators) {
         isResult = false;
     });
 
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", e => {
         if (e.key === operator.innerText) operator.click();
         if (operator.innerText === "=" && e.key === "Enter") operator.click();
+        if (operator.innerText === "x" && e.key === "*") operator.click();
+        if (operator.innerText === "÷" && e.key === "/") operator.click();    
     });
+
+    setButtonsColorEffects(operator);
 };
 
 allClear.addEventListener("click", () => {
@@ -171,10 +207,15 @@ clear.addEventListener("click", () => {
     }
 });
 
-document.addEventListener("keydown", (e) => {
-        // console.log(e.key)
+setButtonsColorEffects(allClear);
+setButtonsColorEffects(clear);
+
+for (const button of buttons) {
+    button.addEventListener("click", e => e.target.blur());
+    
+}
+
+document.addEventListener("keydown", e => {
         if (e.key === "Escape" || e.key === "c") allClear.click();
-        if (e.key === "Backspace") clear.click();
-        
-        
-    });
+        if (e.key === "Backspace") clear.click();     
+});

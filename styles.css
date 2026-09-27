@@ -1,28 +1,113 @@
+body {
+    background-color: rgb(248, 248, 248);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+h1 {
+    font-family: monospace;
+    font-size: 40px;
+}
+
 .calculator {
     display: flex;
     justify-content: center;
     border: solid black 1px;
-    border-radius: 5px;
-    padding: 16px;
-    width: 600px;
+    border-radius: 10px;
+    padding: 8px;
+    width: 336px;
     flex-wrap: wrap;
+    background-color: black;
+}
+
+.display-div {
+    justify-content: center;
+    margin: 8px;
+    margin-bottom: 0px;
 }
 
 #display {
-    background-color: white;
+    background-color: rgb(219, 247, 233);
     border-color: darkgray;
     border-radius: 5px;
-    width: 568px;
+    width: 280px;
+    height: 70px;
     resize: none;
     text-align: end;
+    line-height: 70px;
+    font-family: monospace;
+    font-size: 30px;
+    margin: 0px;
+    padding-right: 16px;
 }
 
 .buttons-div {
-    justify-content: center; 
+    display: flex;
+    margin: 8px;
+    padding: 8px;
+    gap: 8px;
+}
+
+.operands {
+    display: flex;
+    flex-direction: column;
+}
+
+.digits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;    
+}
+
+.row {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+}
+
+.delete-row {
+    display: flex;
+    justify-content: end;
+    gap: 8px;
+    width: 226px;
+}
+
+.all-clear {
+    flex-grow: 2;
+}
+
+.delete-row button {
+    background-color: rgba(243, 77, 77, 0.918);
+}
+
+.operands {
+    display: flex;
+    gap: 8px;
+}
+
+.operands button {
+    background-color: rgb(25, 138, 132);
+}
+
+#plus {
+    flex-grow: 2;
+    background-color: darkorange;
 }
 
 button {
-    width: 120px;
-    height: 71px;
+    width: 70px;
+    height: 70px;
     border-radius: 10px;
+    border: none;
+    background-color: gray;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
 }
